@@ -178,3 +178,6 @@ data/
 
 preprocess/intracardiac-atrial-fibrillation-database-1.0.0/
 preprocess/intracardiac-atrial-fibrillation-database-1.0.0.zip
+
+.DS_Store
+preprocess/.DS_Store
