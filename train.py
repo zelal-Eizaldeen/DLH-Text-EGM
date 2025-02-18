@@ -22,10 +22,9 @@ def get_args():
     parser.add_argument('--lr', type = float, default = 1e-4, help='Please choose the learning rate')
     parser.add_argument('--patience', type = int, default = 5, help = 'Please choose the patience of the early stopper')
     parser.add_argument('--signal_size', type = int, default = 250, help = 'Please choose the signal size')
-    parser.add_argument('--device', type = str, default = 'cpu', help = 'Please choose the type of device' )
-
+    parser.add_argument('--device', type = str, default = 'cuda', help = 'Please choose the type of device' )
     parser.add_argument('--warmup', type = int, default = 2000, help = 'Please choose the number of warmup steps for the optimizer' )
-    parser.add_argument('--epochs', type = int, default = 2, help = 'Please choose the number of epochs' )
+    parser.add_argument('--epochs', type = int, default = 100, help = 'Please choose the number of epochs' )
     parser.add_argument('--batch', type = int, default = 2, help = 'Please choose the batch size')
     parser.add_argument('--weight_decay', type = float, default = 1e-2, help = 'Please choose the weight decay')
     parser.add_argument('--model', type = str, default = 'big', help = 'Please choose which model to use')
@@ -38,7 +37,6 @@ def get_args():
     parser.add_argument('--LF', action='store_true', help = 'Please choose whether to do label flipping')
     parser.add_argument('--toy', action = 'store_true', help = 'Please choose whether to use a toy dataset or not')
     parser.add_argument('--inference', action='store_true', help = 'Please choose whether it is inference or not')
-
     parser.add_argument('--norm_loss', type=float, default=1.0, help='Please choose the normalization loss weight')
 
     return parser.parse_args()
@@ -74,20 +72,6 @@ def main():
     
     train = np.load('./data/train_intra.npy', allow_pickle = True).item()
     val = np.load('./data/val_intra.npy', allow_pickle = True).item()
-
-    
-    # Load the data
-    train_data = np.load('./data/train_intra.npy', allow_pickle=True) 
-
-    # Check its shape
-    print("Shape:", train_data.shape)
-   
-
-    # Check the datatype
-    print("Data type:", train_data.dtype)
-
-    # Preview some values
-    # print("Sample data:", train_data[:5])  # Show first 5 samples
     
     if args.toy:
         train = create_toy(train, [0, 1])
